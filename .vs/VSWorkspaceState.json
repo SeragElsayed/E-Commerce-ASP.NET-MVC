@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\EComm.Web",
+    "\\EComm.Web\\Models",
+    "\\EComm.Web\\Views",
+    "\\EComm.Web\\Views\\Order",
+    "\\EComm.Web\\Views\\User"
+  ],
+  "SelectedNode": "\\EComm.Web\\Views\\User\\LogIn.cshtml",
+  "PreviewInSolutionExplorer": false
+}

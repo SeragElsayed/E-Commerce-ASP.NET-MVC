@@ -1,0 +1,20 @@
+﻿
+@model IEnumerable<Order>
+
+@foreach (var item in Model)
+{
+
+    <div class="card col-3" style="width: 18rem;">
+        <img src="orderimage" class="card-img-top" alt="">
+        <div class="card-body">
+            <h5 class="card-title">@Html.DisplayFor(o => item.Status)</h5>
+            @Ajax.ActionLink("Details", "OrderDetails", new { Id = item.Id }, new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "OrderDetailsModalbody", InsertionMode = InsertionMode.Replace, OnSuccess = "ToggleOrderDetailsModal()" }, htmlAttributes: new { @class = "btn btn-outline-info" });
+            @if (item.Status == OrderStatus.Pending)
+            {
+                @Ajax.ActionLink("Cancel", "Delete", new { Id = item.Id }, new AjaxOptions { HttpMethod = "Delete", UpdateTargetId = "OrderList", InsertionMode = InsertionMode.Replace }, htmlAttributes: new { @class = "btn btn-outline-danger" });
+
+            }
+
+        </div>
+    </div>
+}

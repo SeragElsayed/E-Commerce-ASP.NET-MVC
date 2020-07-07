@@ -1,0 +1,25 @@
+﻿@model IEnumerable<EComm.Category>
+
+
+<table class="table  table-bordered table-striped table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Ajax.ActionLink("Edit", "Edit", new { Id = item.Id }, new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "EditModalBody", InsertionMode = InsertionMode.Replace, OnSuccess = "ToggleEditModal()" }, htmlAttributes: new { @class = "btn btn-outline-success" });
+            @Ajax.ActionLink("Delete", "Delete", new { Id = item.Id }, new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "CategoryTable", InsertionMode = InsertionMode.Replace, OnSuccess = "ToggleDeleteModal()" }, htmlAttributes: new { @class = "btn btn-outline-success" })
+
+        </td>
+    </tr>
+}
+
+</table>

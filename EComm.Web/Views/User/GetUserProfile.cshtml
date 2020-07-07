@@ -1,0 +1,25 @@
+﻿
+@model User
+<div id="Profile">
+    <hr />
+    <dl class="dl-horizontal">
+        @*@Html.HiddenFor(model => model.Id)*@
+        <dt>
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+
+       
+        <dt>
+            @*@Html.DisplayNameFor(model => model.ImageURL)*@
+            <img src="@Url.Content(Model.ImageURL)"/>
+        </dt>
+
+
+
+
+    </dl>
+</div>

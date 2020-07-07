@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Product>
+
+@foreach (var item in Model)
+{
+
+    <div class="card col-3" style="width: 18rem;">
+        <img src="@Url.Content(item.ImageURL)" class="card-img-top" alt="">
+        <div class="card-body">
+            <h5 class="card-title">@Html.DisplayFor(o => item.Name)</h5>
+            @* @Ajax.ActionLink("Details", "Details", new { Id = item.Id }, new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "DetailsModalBody", InsertionMode = InsertionMode.Replace, OnSuccess = "ToggleDetailsModal()" }, htmlAttributes: new { @class = "btn btn-outline-success" });*@
+            @Ajax.ActionLink("Details", "ProductDetails", new { Id = item.Id }, new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "ProductDetailsModalbody", InsertionMode = InsertionMode.Replace, OnSuccess = "ToggleProductDetailsModal()" }, htmlAttributes: new { @class = "btn btn-outline-success" });
+
+            @Ajax.ActionLink("Add To Cart", "Add", "Cart", new { ProductId = item.Id }, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "CartItemNumber", InsertionMode = InsertionMode.Replace }, htmlAttributes: new { @class = "btn btn-outline-success" });
+
+        </div>
+    </div>
+}

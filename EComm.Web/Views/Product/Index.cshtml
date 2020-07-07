@@ -1,0 +1,92 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model IEnumerable<Category>
+<h2>Products</h2>
+
+@*<div>@Html.ActionLink("Create", "Create", null, new { @class = "btn btn-success" })</div>*@
+@if (Session["IsAdmin"] != null)
+{
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#CreateModal">Create</button>
+
+    <div id="ProductTable">
+        @Html.Action("GetAllProductsAdmin")
+    </div>
+
+    @Html.Partial("EditModal")
+
+    @Html.Partial("CreateModal")
+
+
+    @section Scripts
+        {
+        <script>
+            function ToggleCreateModal() {
+                $("#CreateModal").modal("toggle");
+            }
+
+            function ToggleEditModal() {
+                $("#EditModal").modal("toggle");
+            }
+
+            $('#CreateModal').on('hidden.bs.modal', function (e) {
+            $(this)
+                .find(".form-control")
+                .val('')
+                .end()
+        })
+       
+
+        $('#EditModal').on('hidden.bs.modal', function (e) {
+            $(this)
+                .find(".form-control")
+                .val('')
+                .end()
+        })
+        </script>
+    }
+}
+else if (Session["UserId"] != null)
+{
+    <div class="row">
+        @Ajax.ActionLink(
+          "All"
+          , "GetAllProductsUser"
+          , "Product"
+          , new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "ProductList", InsertionMode = InsertionMode.Replace }
+           , new { @class = "btn btn-info btn-lg" }
+           )
+        @foreach (var item in Model)
+        {
+            @Ajax.ActionLink(
+           item.Name
+           , "GetProductsUserByCategory"
+           , "Product"
+           , new { CategoryId = item.Id }
+           , new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "ProductList", InsertionMode = InsertionMode.Replace }
+            , new { @class = "btn btn-info btn-lg" }
+            )
+        }
+    </div>
+    <div class="row " id="ProductList">
+        @Html.Action("GetAllProductsUser")
+
+    </div>
+        @Html.Partial("ProductDetailsModal")
+    @section Scripts
+        {
+        <script>
+            function ToggleProductDetailsModal() {
+                $("#ProductDetailsModal").modal("toggle");
+            }
+        </script>
+    }
+
+}
+
+
+
+
+

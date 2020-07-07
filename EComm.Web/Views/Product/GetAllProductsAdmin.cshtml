@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Product>
+
+<table class="table table-bordered table-striped table-hover">
+    <tr>
+        <th>@Html.DisplayNameFor(p=>p.Name)</th>
+        <th>@Html.DisplayNameFor(p=>p.Price)</th>
+        <th>@Html.DisplayNameFor(p=>p.Description)</th>
+        <th>@Html.DisplayNameFor(p=>p.ImageURL)</th>
+        <th>@Html.DisplayNameFor(p=>p.IsShowen)</th>
+        <th>@Html.DisplayNameFor(p=>p.Category.Name)</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        
+        <td>@Html.DisplayFor(p=>item.Name)</td>
+        <td>@Html.DisplayFor(p=>item.Price)</td>
+        <td>@Html.DisplayFor(p=>item.Description)</td>
+        <td>
+            <img src="@Url.Content(item.ImageURL)"  alt="">
+        </td>
+        <td>@Html.DisplayFor(p=>item.IsShowen)</td>
+        <td>@Html.DisplayFor(p=>item.Category.Name)</td>
+        <td class="row">
+
+             @Ajax.ActionLink("Edit", "Edit",new { Id=item.Id},new AjaxOptions{HttpMethod="Get",UpdateTargetId="EditModalBody",InsertionMode=InsertionMode.Replace,OnSuccess="ToggleEditModal()" }, htmlAttributes: new { @class = "btn btn-outline-success" });
+            @Html.ActionLink("Details", "ProductDetails", "Product", new { Id = item.Id }, htmlAttributes: new { @class = "btn btn-outline-success" }) @*;,new AjaxOptions{HttpMethod="Get",UpdateTargetId="abc",InsertionMode=InsertionMode.Replace,OnSuccess="fun2()" });*@
+            @Ajax.ActionLink("Delete", "Delete", "Product", new { Id = item.Id },new AjaxOptions{HttpMethod="Get",UpdateTargetId="ProductTable",InsertionMode=InsertionMode.Replace,OnSuccess="ToggleDeleteModal()" }, htmlAttributes: new { @class = "btn btn-outline-success" })
+        </td>
+    </tr>
+    }
+</table>

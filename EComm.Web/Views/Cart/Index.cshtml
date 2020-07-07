@@ -1,0 +1,84 @@
+﻿@model IEnumerable<EComm.Cart>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+@if (Model.Count() != 0)
+{
+    <div class="row">
+
+    <p>
+        @Html.ActionLink("Check Out", "Create", "Order",null,new { @class="btn btn-success"})
+    </p>
+        ||
+    <p>
+        @Html.ActionLink("Clear Cart", "ClearCart",null,new { @class="btn btn-danger"})
+    </p>
+    </div>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Users.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Products.Name)
+
+        </th>
+        <th>
+            Product Number
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr id="@item.ProductId">
+            <td>
+                @Html.DisplayFor(modelItem => item.Users.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Products.Name)
+            </td>
+            <td id="@item.Products.Name">
+                @Html.DisplayFor(modelItem => item.ProductQuantity)
+            </td>
+            <td>
+                @Ajax.ActionLink(
+               "+1"
+               , "IncrementProduct"
+               , new { Id = item.Id }
+               , new AjaxOptions { HttpMethod = "Get", UpdateTargetId = $"{item.Products.Name}", InsertionMode = InsertionMode.Replace }
+                ) ||
+                @Ajax.ActionLink(
+               "-1"
+               , "DecrementProduct"
+               , new { Id = item.Id }
+               , new AjaxOptions { 
+                   HttpMethod = "Get", 
+                   UpdateTargetId = $"{item.Products.Name}", 
+                   InsertionMode = InsertionMode.Replace                  
+                        }) ||
+                @*@Ajax.ActionLink(
+                    "Remove"
+                    , "DeleteProduct"
+                    , new { Id = item.Id }
+                    , new AjaxOptions { HttpMethod = "Get", UpdateTargetId = $"{item.ProductId}", InsertionMode = InsertionMode.Replace }
+                     )*@
+                @*@Ajax.ActionLink("+", "IncrementProduct", new { Id = item.Id }) |
+                    @Html.ActionLink("-", "DecrementProduct", new { id = item.Id }) |*@
+                @Html.ActionLink(
+               "Delete", 
+               "DeleteProduct", 
+               new { id = item.Id },
+               new { @class = "btn btn-danger" }
+               )
+            </td>
+        </tr>
+    }
+
+</table>
+

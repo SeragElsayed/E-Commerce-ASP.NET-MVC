@@ -1,0 +1,76 @@
+﻿@model Product
+@*@Ajax.ActionLink("Create", "Create", new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "ProductTable", InsertionMode = InsertionMode.Replace, OnSuccess = "ToggleCreateModal()" }) |*@
+
+@using (Ajax.BeginForm(
+    "Create",
+    "Product",
+    new AjaxOptions
+    {
+        HttpMethod = "Post",
+        UpdateTargetId = "ProductTable",
+        InsertionMode = InsertionMode.Replace,
+        OnSuccess = "ToggleCreateModal()"
+    },
+    new { enctype = "multipart/form-data" }
+    ))
+{
+    @*@Html.Partial("CreateAndEdit")*@
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.IsShowen, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.IsShowen, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.IsShowen, "", new { @class = "text-danger" })
+        </div>
+    </div>
+   
+    <div class="form-group">
+       <input type="file" name="ProductImage"/>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.CategoryId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.CategoryId, ViewBag.Categories as SelectList, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @*<button type="submit" value="Create" class="btn btn-info" />*@
+            <button type="submit" value="Create" class="btn btn-info">Create</button>
+
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+
+            @*<a type="submit" value="Create" class="btn btn-default" />*@
+
+
+        </div>
+    </div>
+
+}

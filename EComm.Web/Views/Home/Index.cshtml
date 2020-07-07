@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Featured Products</h2>
+
+@Html.Partial("LogIn")
+@Html.Partial("SignUp")
+
+@section Scripts
+{
+    <script>
+        function ToggleCreateModal() {
+            $("#LogIn ").modal("toggle");
+
+        }
+
+        function ToggleEditModal() {
+            $("#SignUp").modal("toggle");
+
+        }
+        $('#LogInModal').on('hidden.bs.modal', function (e) {
+            $(this)
+                .find(".form-control")
+                .val('')
+                .end()
+        })
+       
+
+        $('#SignUpModal').on('hidden.bs.modal', function (e) {
+            $(this)
+                .find(".form-control")
+                .val('')
+                .end()
+        })
+    </script>
+}

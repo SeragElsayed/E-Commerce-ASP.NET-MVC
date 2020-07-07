@@ -1,0 +1,44 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Categories</h2>
+
+@*<div>@Html.ActionLink("Create", "Create", null, new { @class = "btn btn-success" })</div>*@
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#CreateModal">Create</button>
+
+<div id="CategoryTable">
+    @Html.Action("GetAllCategories")
+</div>
+
+@Html.Partial("EditModal")
+
+@Html.Partial("CreateModal")
+
+
+@section Scripts
+{
+    <script>
+        function ToggleCreateModal() {
+            $("#CreateModal").modal("toggle");
+            
+        }
+
+        function ToggleEditModal() {
+            $("#EditModal").modal("toggle");
+
+        }
+        $('#CreateModal').on('hidden.bs.modal', function (e) {
+            $(this)
+                .find(".form-control")
+                .val('')
+                .end()
+        })
+    </script>
+}
+
+
+
+
