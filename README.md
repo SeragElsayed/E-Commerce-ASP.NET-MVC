@@ -2,7 +2,7 @@
 E-commerce web application where users can add items to their shopping cart and make orders, Admin can 
 add products and accepts orders.
 
-###Used Technology.
+### Used Technology.
 - ASP.NET MVC.
 - Bootstrap.
 - JQuery.
@@ -10,10 +10,10 @@ add products and accepts orders.
 - Login is managed by session.
 
 
-###Database
+### Database
 	Import EcommDB to your SQL server.
 
-###Admin Credentials.
+### Admin Credentials.
 	- Username: admin
 	- Password: admin
 
